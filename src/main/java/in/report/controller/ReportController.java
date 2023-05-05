@@ -17,24 +17,31 @@ public class ReportController {
 
 	@Autowired
 	private ReportService service;
-	
+
 	@GetMapping("/pdf")
-	public void pdfExport(HttpServletResponse response) throws Exception {
+	public void pdfExport(HttpServletResponse response,Model model) throws Exception {
 		response.setContentType("application/pdf");
 		response.addHeader("content-Disposition", "attachment;filename=citizenPlans.pdf;");
-		service.exportPDF(response);
+		model.addAttribute("msg", "text");
+		boolean status = service.exportPDF(response);
+		if (status) {
+			model.addAttribute("success", "Excel Report Attachment Sent to your Email ");
+		}
 	}
-	
+
 	@GetMapping("/excel")
-	public void excelExport(HttpServletResponse response) throws Exception {
+	public void excelExport(HttpServletResponse response, Model model) throws Exception {
 		response.setContentType("application/octect-stream");
 		response.addHeader("content-Disposition", "attachment;filename=citizenPlans.xls;");
-		service.exportExcel(response);
+		boolean status = service.exportExcel(response);
+		if (status) {
+			model.addAttribute("success", "Excel Report Attachment Sent to your Email ");
+		}
 	}
-	
+
 	@PostMapping("/search")
-	public String handleSearch(@ModelAttribute ("search") SearchRequest request, Model model) {
-		model.addAttribute("plans",service.search(request));
+	public String handleSearch(@ModelAttribute("search") SearchRequest request, Model model) {
+		model.addAttribute("plans", service.search(request));
 		init(model);
 		return "index";
 	}
@@ -51,6 +58,4 @@ public class ReportController {
 		model.addAttribute("status", service.getPlanStatus());
 	}
 
-	
-	}
-
+}
