@@ -20,7 +20,7 @@
 <body>
 	<div class="container">
 
-		<h1 class="pb-3 mt-3">Insurance Report Application</h1>
+		<h1 class="pb-3 mt-3 mb-4">Insurance Report Application</h1>
 
 		<form:form action="search" modelAttribute="search" method="POST">
 
@@ -29,18 +29,18 @@
 					<td>Plan Name:</td>
 					<td><form:select path="planName">
 							<form:option value="">-Select-</form:option>
-							<form:options items="${names}" />
+							<form:options items="${names}" class="mb-3" />
 						</form:select></td>
 
 					<td>Plan Status:</td>
 					<td><form:select path="planStatus">
 							<form:option value="">-Select-</form:option>
-							<form:options items="${status}" />
+							<form:options items="${status}" class="mb-3" />
 						</form:select></td>
 
 					<td>Gender:</td>
 					<td><form:select path="gender">
-							<form:option value="">-Select-</form:option>
+							<form:option value="" class="mb-3">-Select-</form:option>
 							<form:option value="Male">Male</form:option>
 							<form:option value="Fe-Male">Fe-Male</form:option>
 						</form:select></td>
@@ -49,15 +49,15 @@
 					<td>Start-Date:</td>
 
 					<td><form:input path="PlanStartDate" type="date"
-							data-date-formate="mm/dd/yyyy" /></td>
+							data-date-formate="mm/dd/yyyy" class="mt-2" /></td>
 
 					<td>End-Date:</td>
-					<td><form:input type="date" path="PlanEndDate" /></td>
+					<td><form:input type="date" path="PlanEndDate" class="mt-2" /></td>
 				</tr>
 				<tr>
-				<td > <a href="/" class="btn btn-secondary">reset</a></td>
+					<td><a href="/" class="btn btn-secondary mt-3">reset</a></td>
 					<td><input type="submit" value="Search"
-						class="btn btn-primary" /></td>
+						class="btn btn-primary mt-3" /></td>
 				</tr>
 
 
@@ -106,8 +106,11 @@
 		</table>
 
 		<hr />
-
-		Export : <a href="excel"> Excel </a> <br> <a href="pdf"> Pdf </a>
+		<h4 class="text-success">${success}</h4>
+		<p>${msg }</p>
+		<h5>Export :-</h5>
+		<a href="excel" class="btn btn-info me-4"> Excel </a> <a href="pdf"
+			class="btn btn-secondary p-1.5"> Pdf </a>
 
 	</div>
 	<script
